@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Sen:wght@400..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar-link {
+  @apply font-semibold cursor-pointer hover:text-yellow-700 transition ease-in-out duration-300;
+}
+
+@layer base {
+  :root {
+
+    --radius: 0.5rem
+  }
+}
