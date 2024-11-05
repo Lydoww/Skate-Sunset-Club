@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../types/Product";
 import { fetchProductById } from "../services/productService";
 import { motion } from "framer-motion";
 import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
-import Navbar from "../components/Navbar"; // Assurez-vous que Navbar est importé
+import Navbar from "../components/Navbar";
+import skate2 from "../assets/skate2.jpg";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +13,8 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+
+  const imageRef = useRef<HTMLImageElement | null>(null); // Référence pour l'image
 
   // Charge le produit via l'ID
   useEffect(() => {
@@ -30,6 +33,31 @@ export default function ProductDetail() {
 
     loadProduct();
   }, [id]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
+    if (!imageRef.current) return;
+
+    const { clientX, clientY } = e; // Position du curseur
+    const { width, height, left, top } =
+      imageRef.current.getBoundingClientRect();
+
+    const offsetX = clientX - left;
+    const offsetY = clientY - top;
+
+    // Calculer la position du zoom (en pourcentage)
+    const xPercent = (offsetX / width) * 100;
+    const yPercent = (offsetY / height) * 100;
+
+    // Appliquer la transformation CSS pour zoomer
+    imageRef.current.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    imageRef.current.style.transform = "scale(1.2)"; // Zoom au niveau du curseur
+  };
+
+  const handleMouseLeave = () => {
+    if (imageRef.current) {
+      imageRef.current.style.transform = "scale(1)"; // Réinitialiser le zoom
+    }
+  };
 
   if (loading) {
     return (
@@ -60,7 +88,14 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      className="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8"
+      style={{
+        backgroundImage: `url(${skate2})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="max-w-7xl w-full">
         {/* Navbar avec fond blanc et texte noir */}
         <Navbar isProductDetailPage={true} scroll={false} />
@@ -71,9 +106,14 @@ export default function ProductDetail() {
           className="bg-white shadow-xl rounded-lg overflow-hidden h-full"
         >
           <div className="md:flex">
-            <div className="md:w-1/2 flex items-center justify-center">
+            <div
+              className="md:w-1/2 flex items-center justify-center"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
               <img
-                className="h-auto max-h-[400px] w-auto object-contain"
+                ref={imageRef}
+                className="h-auto max-h-[400px] w-auto object-contain transition-transform duration-300"
                 src={product.image}
                 alt={product.title}
               />

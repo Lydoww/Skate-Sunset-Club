@@ -3,8 +3,9 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import skate from "../assets/skate.jpg";
 import skate2 from "../assets/skate2.jpg";
 import skate3 from "../assets/skate3.jpg";
+import skate4 from "../assets/skate4.jpg";
 
-const images = [skate, skate2, skate3];
+const images = [skate4, skate, skate2, skate3];
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,13 +49,13 @@ const Carousel = () => {
       </div>
       <button
         onClick={prevImage}
-        className="absolute top-1/2 left-0 transform -translate-y-1/2  bg-opacity-50 text-white p-2 rounded-full z-10 hover:text-yellow-500 transition-colors duration-300 ease-in-out"
+        className="absolute top-1/2 left-0 transform -translate-y-1/2  bg-opacity-50 text-white p-2 rounded-full z-10 hover:text-yellow-700 transition-colors duration-300 ease-in-out"
       >
         <FaArrowLeft size={30} />
       </button>
       <button
         onClick={nextImage}
-        className="absolute top-1/2 right-0 transform -translate-y-1/2  bg-opacity-50 text-white p-2 rounded-full z-10 hover:text-yellow-500 transition-colors duration-300 ease-in-out"
+        className="absolute top-1/2 right-0 transform -translate-y-1/2  bg-opacity-50 text-white p-2 rounded-full z-10 hover:text-yellow-700 transition-colors duration-300 ease-in-out"
       >
         <FaArrowRight size={30} />
       </button>
