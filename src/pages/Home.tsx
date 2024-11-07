@@ -4,6 +4,7 @@ import ProductList from "../components/ProductList";
 import { Product } from "../types/Product"; // Assure-toi d'importer le type Product
 import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
+import Loader from "@/components/Loader";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,12 +36,13 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   return (
     <div>
-      <Navbar isProductDetailPage={false} scroll={scroll} /> {/* On passe false ici car c'est la page d'accueil */}
+      <Navbar isProductDetailPage={false} scroll={scroll} />{" "}
+      {/* On passe false ici car c'est la page d'accueil */}
       <Carousel />
       <ProductList products={products} />
     </div>

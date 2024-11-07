@@ -7,11 +7,12 @@ import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
 import Navbar from "../components/Navbar";
 import skate2 from "../assets/skate2.jpg";
 import { useCart } from "@/contexts/CartContext";
+import Loader from "../components/Loader"; // Import du loader
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Ajout de l'état loading
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
@@ -50,11 +51,7 @@ export default function ProductDetail() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-12 h-12 border-4 border-gray-300 border-t-gray-800 rounded-full"
-        />
+        <Loader /> {/* Affiche le loader pendant le chargement */}
       </div>
     );
   }
@@ -161,7 +158,6 @@ export default function ProductDetail() {
                   <ShoppingCart className="mr-2 h-5 w-5" />
                   Add to Cart
                 </motion.button>
-               
               </div>
             </div>
           </div>
@@ -172,10 +168,7 @@ export default function ProductDetail() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-8"
         >
-          <a
-            href="/"
-            className="text-white flex items-center"
-          >
+          <a href="/" className="text-white flex items-center">
             <ArrowLeft className="mr-2 h-5 w-5" />
             <span className="hover:underline">Back to products</span>
           </a>
