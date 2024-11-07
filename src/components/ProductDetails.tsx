@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
 import Navbar from "../components/Navbar";
 import skate2 from "../assets/skate2.jpg";
+import { useCart } from "@/contexts/CartContext";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -13,8 +14,8 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
-
-  const imageRef = useRef<HTMLImageElement | null>(null); // Référence pour l'image
+  const { addItem } = useCart();
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // Charge le produit via l'ID
   useEffect(() => {
@@ -34,28 +35,15 @@ export default function ProductDetail() {
     loadProduct();
   }, [id]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
-    if (!imageRef.current) return;
-
-    const { clientX, clientY } = e; // Position du curseur
-    const { width, height, left, top } =
-      imageRef.current.getBoundingClientRect();
-
-    const offsetX = clientX - left;
-    const offsetY = clientY - top;
-
-    // Calculer la position du zoom (en pourcentage)
-    const xPercent = (offsetX / width) * 100;
-    const yPercent = (offsetY / height) * 100;
-
-    // Appliquer la transformation CSS pour zoomer
-    imageRef.current.style.transformOrigin = `${xPercent}% ${yPercent}%`;
-    imageRef.current.style.transform = "scale(1.2)"; // Zoom au niveau du curseur
-  };
-
-  const handleMouseLeave = () => {
-    if (imageRef.current) {
-      imageRef.current.style.transform = "scale(1)"; // Réinitialiser le zoom
+  const handleAddToCart = () => {
+    if (product) {
+      addItem({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: quantity,
+        image: product.image,
+      });
     }
   };
 
@@ -106,11 +94,7 @@ export default function ProductDetail() {
           className="bg-white shadow-xl rounded-lg overflow-hidden h-full"
         >
           <div className="md:flex">
-            <div
-              className="md:w-1/2 flex items-center justify-center"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-            >
+            <div className="md:w-1/2 flex items-center justify-center">
               <img
                 ref={imageRef}
                 className="h-auto max-h-[400px] w-auto object-contain transition-transform duration-300"
@@ -172,17 +156,12 @@ export default function ProductDetail() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleAddToCart}
                 >
                   <ShoppingCart className="mr-2 h-5 w-5" />
                   Add to Cart
                 </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 bg-gray-200 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                >
-                  Buy Now
-                </motion.button>
+               
               </div>
             </div>
           </div>
@@ -195,7 +174,7 @@ export default function ProductDetail() {
         >
           <a
             href="/"
-            className="text-indigo-600 hover:text-indigo-500 flex items-center"
+            className="text-white flex items-center"
           >
             <ArrowLeft className="mr-2 h-5 w-5" />
             <span className="hover:underline">Back to products</span>

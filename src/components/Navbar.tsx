@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../assets/skatelogo.png";
 
 interface NavbarProps {
-  isProductDetailPage: boolean;  // Ajoute cette prop pour savoir si on est sur la page produit
-  scroll: boolean;  // Récupère l'état du scroll pour appliquer le changement de couleur
+  isProductDetailPage: boolean; // Ajoute cette prop pour savoir si on est sur la page produit
+  scroll: boolean; // Récupère l'état du scroll pour appliquer le changement de couleur
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isProductDetailPage, scroll }) => {
@@ -49,8 +48,13 @@ const Navbar: React.FC<NavbarProps> = ({ isProductDetailPage, scroll }) => {
       </div>
 
       {/* Icône de panier à droite */}
-      <div className={`flex-1 flex justify-end`}>
-        <AiOutlineShoppingCart size={28} className="navbar-link" />
+      <div className="flex-1 flex justify-end">
+        <Link to="/panier">
+          <AiOutlineShoppingCart
+            size={28}
+            className="navbar-link cursor-pointer"
+          />
+        </Link>
       </div>
     </div>
   );
