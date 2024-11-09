@@ -2,7 +2,7 @@ import { useCart } from "../contexts/CartContext";
 import CartItem from "../components/Cart/CartItem";
 import CartSummary from "../components/Cart/CartSummary";
 import EmptyCartMessage from "../components/Cart/EmptyCartMessage";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Bars/Navbar";
 
 export default function CartPage() {
   const { items } = useCart();

@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { Product } from "../types/Product";
-import { fetchProductById } from "../services/productService";
+import { Product } from "../../types/Product";
+import { fetchProductById } from "../../services/productService";
 import { motion } from "framer-motion";
 import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
-import Navbar from "../components/Navbar";
-import skate2 from "../assets/skate2.jpg";
+import Navbar from "../Bars/Navbar";
+import skate2 from "@/assets/skate2.jpg";
 import { useCart } from "@/contexts/CartContext";
-import Loader from "../components/Loader"; // Import du loader
+import Loader from "../../ui/Loader/Loader";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -29,12 +29,35 @@ export default function ProductDetail() {
       } catch (err) {
         setError("Failed to load product details. Please try again later.");
       } finally {
-        setLoading(false);
+        setLoading(false); // Définir le loading à false une fois la requête terminée
       }
     };
 
     loadProduct();
   }, [id]);
+
+  // Affichage du loader si 'loading' est vrai
+  if (loading) {
+    return <Loader />;
+  }
+
+  // Affichage d'un message d'erreur ou de produit introuvable
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  // Si le produit n'est pas trouvé
+  if (!product) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-gray-500">No product found.</p>
+      </div>
+    );
+  }
 
   const handleAddToCart = () => {
     if (product) {
@@ -47,30 +70,6 @@ export default function ProductDetail() {
       });
     }
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader /> {/* Affiche le loader pendant le chargement */}
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-red-500">{error}</p>
-      </div>
-    );
-  }
-
-  if (!product) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-gray-500">No product found.</p>
-      </div>
-    );
-  }
 
   return (
     <div

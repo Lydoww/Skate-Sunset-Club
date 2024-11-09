@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ChevronDown } from "lucide-react";
-import skate from "../assets/skate.jpg";
-import skate2 from "../assets/skate2.jpg";
-import skate3 from "../assets/skate3.jpg";
-import skate4 from "../assets/skate4.jpg";
+import skate from "@/assets/skate.jpg";
+import skate2 from "@/assets/skate2.jpg";
+import skate3 from "@/assets/skate3.jpg";
+import skate4 from "@/assets/skate4.jpg";
 
 const images = [skate4, skate, skate2, skate3];
 

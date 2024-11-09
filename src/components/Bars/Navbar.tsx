@@ -1,6 +1,6 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import logo from "../assets/skatelogo.png";
+import logo from "@/assets/skatelogo.png";
 
 interface NavbarProps {
   isProductDetailPage: boolean; // Ajoute cette prop pour savoir si on est sur la page produit
