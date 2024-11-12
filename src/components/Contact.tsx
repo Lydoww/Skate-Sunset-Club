@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
+import Navbar from "./Bars/Navbar";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -25,6 +26,8 @@ export default function ContactPage() {
   };
 
   return (
+    <>
+    <Navbar isProductDetailPage={false} scroll={true}/>
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -159,5 +162,6 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

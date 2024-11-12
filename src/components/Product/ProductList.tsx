@@ -9,7 +9,7 @@ export default function MinimalistSkateProductGrid({
   products,
 }: ProductGridProps) {
   return (
-    <section id="product-list" className="py-16 bg-gray-100 bg-white">
+    <section id="product-list" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-8">
           Our Collection

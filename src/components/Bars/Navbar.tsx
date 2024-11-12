@@ -3,19 +3,20 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/skatelogo.png";
 
 interface NavbarProps {
-  isProductDetailPage: boolean; // Ajoute cette prop pour savoir si on est sur la page produit
-  scroll: boolean; // Récupère l'état du scroll pour appliquer le changement de couleur
+  isProductDetailPage: boolean;
+  scroll: boolean;
+  className?: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isProductDetailPage, scroll }) => {
+const Navbar = ({ isProductDetailPage, scroll }: NavbarProps) => {
   return (
     <div
       className={`fixed top-0 w-full h-24 flex items-center px-10 transition ease-linear duration-200 ${
         isProductDetailPage
-          ? "bg-transparent text-black" // Pour la page produit, on garde le fond transparent et le texte noir
+          ? "bg-transparent text-black" // Pour la page produit, fond transparent et texte noir
           : scroll
-          ? "bg-white text-black shadow-md" // Si on scrolle sur la home, fond blanc et texte noir
-          : "bg-transparent text-white" // Si on n'a pas scrollé sur la home, fond transparent et texte blanc
+          ? "bg-white text-black shadow-md" // Si on scrolle, fond blanc, texte noir, ombre
+          : "bg-transparent text-white" // Si pas de scroll, fond transparent, texte blanc
       }`}
       style={{ zIndex: 999 }}
     >
