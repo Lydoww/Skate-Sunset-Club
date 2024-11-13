@@ -9,9 +9,8 @@ export default function CartPage() {
 
   return (
     <>
-      <Navbar isProductDetailPage={false} scroll={false} />
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Votre Panier</h1>
+      <Navbar isProductDetailPage={true} scroll={false} />
+      <div className="container mx-auto px-4 py-8 mt-24">
         {items.length === 0 ? (
           <EmptyCartMessage />
         ) : (

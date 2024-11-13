@@ -4,6 +4,7 @@ import ProductList from "@/components/Product/ProductList";
 import { Product } from "@/types/Product"; // Assure-toi d'importer le type Product
 import Navbar from "@/components/Bars/Navbar";
 import Carousel from "@/components/Carousel/Carousel";
+import Footer from "@/components/Bars/FootBar";
 // import Loader from "@/ui/Loader/Loader"; // Import du Loader
 
 const Home = () => {
@@ -36,14 +37,6 @@ const Home = () => {
     };
   }, []);
 
-  // if (loading) {
-  //   return <Loader />; // Affiche le loader si les produits sont en train de charger
-  // }
-
-  // if (error) {
-  //   return <p>{error}</p>; // Affiche un message d'erreur si la requête échoue
-  // }
-
   return (
     <div>
       <header>
@@ -61,9 +54,7 @@ const Home = () => {
         </section>
       </main>
 
-      <footer>
-        <p>&copy; 2024, Your Company. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

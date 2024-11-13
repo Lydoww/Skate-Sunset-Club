@@ -23,7 +23,7 @@ import Footer from "../Bars/FootBar";
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true); // Ajout de l'état loading
+  const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
@@ -49,9 +49,7 @@ export default function ProductDetail() {
             <span className="font-medium">{title}</span>
           </div>
           <ChevronDown
-            className={`h-5 w-5 transition-transform ${
-              isOpen ? "rotate-180" : ""
-            }`}
+            className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180" : ""}`}
           />
         </button>
         {isOpen && <div className="pb-4 text-gray-600">{children}</div>}
@@ -59,7 +57,7 @@ export default function ProductDetail() {
     );
   };
 
-  // Charge le produit via l'ID
+  // Load product by ID
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -70,19 +68,19 @@ export default function ProductDetail() {
       } catch (err) {
         setError("Failed to load product details. Please try again later.");
       } finally {
-        setLoading(false); // Définir le loading à false une fois la requête terminée
+        setLoading(false); // Set loading to false after request is finished
       }
     };
 
     loadProduct();
   }, [id]);
 
-  // Affichage du loader si 'loading' est vrai
+  // Show loader if 'loading' is true
   if (loading) {
     return <Loader />;
   }
 
-  // Affichage d'un message d'erreur ou de produit introuvable
+  // Show error message or product not found
   if (error) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -91,7 +89,7 @@ export default function ProductDetail() {
     );
   }
 
-  // Si le produit n'est pas trouvé
+  // If no product is found
   if (!product) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -106,16 +104,16 @@ export default function ProductDetail() {
         id: product.id,
         title: product.title,
         price: product.price,
-        quantity: quantity, // Utilisation de la quantité choisie
+        quantity: quantity, // Use the selected quantity
         image: product.image,
       });
 
-      toast.success(`Produit ajouté dans le panier ! Quantité : ${quantity}`);
+      toast.success(`Product added to cart! Quantity: ${quantity}`);
     }
   };
 
   const backButton = () => {
-    navigate("/"); // Utilisez navigate ici
+    navigate("/"); // Use navigate here
   };
 
   const toggleSection = (section: string) => {
@@ -140,28 +138,28 @@ export default function ProductDetail() {
             <p className="text-gray-500">No product found.</p>
           </div>
         ) : (
-          <div className="container mx-auto px-4 py-8 mt-8">
+          <div className="container mx-auto px-6 py-14 mt-8">
             <div className="flex flex-col md:flex-row gap-8">
               <motion.div
                 className="md:w-2/3"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.7 }}
               >
                 <img
                   src={product.image}
                   alt={product.title}
                   ref={imageRef}
-                  className="w-full max-w-md ms h-auto object-contain rounded-lg shadow-lg"
+                  className="w-full max-w-md ms h-auto object-contain "
                 />
                 <button
-              className="mb-4 flex items-center hover:underline mt-8"
-              onClick={backButton}
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back
-            </button>
+                  className="mb-4 flex items-center hover:underline mt-8"
+                  onClick={backButton}
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                </button>
               </motion.div>
-              
+
               <motion.div
                 className="md:w-1/3"
                 initial={{ opacity: 0, x: 50 }}
@@ -196,55 +194,50 @@ export default function ProductDetail() {
                   />
                 </div>
                 <button
-                  onClick={() => handleAddToCart()} // S'assurer que handleAddToCart est appelé au clic
+                  onClick={() => handleAddToCart()}
                   className="w-full bg-yellow-700 text-black py-2 px-4 rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center mb-8"
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" /> Add to cart
                 </button>
-                
 
                 {/* Accordion sections */}
                 <div>
                   <AccordionItem
-                    title="Livraison"
+                    title="Delivery"
                     icon={<Truck className="h-5 w-5" />}
                     isOpen={openSection === "delivery"}
                     onToggle={() => toggleSection("delivery")}
                   >
                     <ul className="space-y-2">
-                      <li>Livraison sous 2 à 7 jours ouvrés</li>
+                      <li>Delivery within 2 to 7 business days</li>
                       <li>
-                        Livraison en France métropolitaine à domicile (4,99€) ou
-                        via Mondial Relais (3,99€)
+                        Delivery in mainland France to your home (4.99€) or via
+                        Mondial Relay (3.99€)
                       </li>
-                      <li>Livraison gratuite à partir de 70€ d'achat</li>
+                      <li>Free delivery on orders over 70€</li>
                     </ul>
                   </AccordionItem>
 
                   <AccordionItem
-                    title="Echanges & retours"
+                    title="Exchanges & Returns"
                     icon={<RefreshCcw className="h-5 w-5" />}
                     isOpen={openSection === "returns"}
                     onToggle={() => toggleSection("returns")}
                   >
                     <div className="space-y-4">
                       <p>
-                        Vous avez 30 jours à compter de la date de réception de
-                        votre colis pour nous renvoyer le produit et effectuer
-                        un échange (selon la disponibilité du stock), recevoir
-                        un avoir ou un remboursement.
+                        You have 30 days from the receipt of your package to return
+                        the product and request an exchange (subject to stock availability),
+                        receive a store credit, or a refund.
                       </p>
                       <p>
                         <strong>
-                          Les frais de retour et de réexpédition sont à votre
-                          charge
+                          Return and re-shipping costs are at your expense
                         </strong>
-                        , sauf si le retour ou l'échange est nécessaire en
-                        raison de notre faute.
+                        , unless the return or exchange is due to our mistake.
                       </p>
                       <p>
-                        Pour effectuer un échange ou un remboursement, contactez
-                        nous avec votre numéro de commande à{" "}
+                        To process an exchange or refund, contact us with your order number at{" "}
                         <a
                           href="mailto:contact@homonoia-paris.com"
                           className="text-blue-600 hover:underline"

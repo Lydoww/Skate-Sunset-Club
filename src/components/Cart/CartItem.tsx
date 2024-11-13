@@ -1,5 +1,5 @@
-import { useCart } from '../../contexts/CartContext';
-import { Trash2, Plus, Minus } from 'lucide-react';
+import { useCart } from "../../contexts/CartContext";
+import { Trash2, Plus, Minus } from "lucide-react";
 
 interface CartItemProps {
   item: {
@@ -16,7 +16,11 @@ export default function CartItem({ item }: CartItemProps) {
 
   return (
     <div className="flex items-center border-b border-gray-200 py-4">
-      <img src={item.image} alt={item.title} className="w-20 h-20 object-cover mr-4" />
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-20 h-20 object-cover mr-4"
+      />
       <div className="flex-grow">
         <h3 className="text-lg font-semibold">{item.title}</h3>
         <p className="text-gray-600">{item.price.toFixed(2)} €</p>
@@ -37,7 +41,9 @@ export default function CartItem({ item }: CartItemProps) {
         </div>
       </div>
       <div className="text-right">
-        <p className="text-lg font-semibold">{(item.price * item.quantity).toFixed(2)} €</p>
+        <p className="text-lg font-semibold">
+          {(item.price * item.quantity).toFixed(2)} €
+        </p>
         <button
           onClick={() => removeItem(item.id)}
           className="text-red-500 focus:outline-none focus:text-red-600"
