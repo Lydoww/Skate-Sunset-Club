@@ -1,4 +1,4 @@
-import { useCart } from "../../contexts/CartContext";
+import { useCart } from "@/hooks/useCart";
 
 export default function CartSummary() {
   const { items } = useCart();

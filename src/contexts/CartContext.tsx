@@ -6,46 +6,47 @@ import {
   ReactNode,
 } from "react";
 
-interface CartItem {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import { CartItem, CartContextType } from "@/types/CartTypes";
 
-interface CartContextType {
-  items: CartItem[];
-  addItem: (item: CartItem) => void;
-  removeItem: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
-  clearCart: () => void;
-  itemCount: number;
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 interface CartProviderProps {
   children: ReactNode;
 }
 
-export function CartProvider({ children }: CartProviderProps) {
+// Durée de session en millisecondes (1 heure)
+const SESSION_DURATION = 60 * 60 * 1000;
+
+export function CartContextProvider({ children }: CartProviderProps) {
   const [items, setItems] = useState<CartItem[]>(() => {
-    // Charge le panier depuis localStorage lors de l'initialisation
     const savedCart = localStorage.getItem("cartItems");
-    return savedCart ? JSON.parse(savedCart) : [];
+    const savedTimestamp = localStorage.getItem("cartTimestamp");
+
+    // Vérifie si le panier a été enregistré et s'il est encore valide
+    if (savedCart && savedTimestamp) {
+      const timestamp = parseInt(savedTimestamp, 10);
+      const currentTime = Date.now();
+
+      // Si l'heure actuelle dépasse d'une heure l'horodatage sauvegardé, on efface les données
+      if (currentTime - timestamp < SESSION_DURATION) {
+        return JSON.parse(savedCart);
+      } else {
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("cartTimestamp");
+      }
+    }
+    return [];
   });
 
-  // Sauvegarde le panier dans localStorage à chaque modification
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(items));
+    localStorage.setItem("cartTimestamp", Date.now().toString());
   }, [items]);
 
   const addItem = (item: CartItem) => {
     setItems((prevItems) => {
       const existingItem = prevItems.find((i) => i.id === item.id);
       if (existingItem) {
-        // Ajoute la quantité choisie au lieu d'incrémenter de 1
         return prevItems.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
         );
@@ -68,6 +69,8 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const clearCart = () => {
     setItems([]);
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("cartTimestamp");
   };
 
   const itemCount = items.reduce((count, item) => count + item.quantity, 0);

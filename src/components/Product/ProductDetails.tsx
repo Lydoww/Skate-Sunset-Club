@@ -9,7 +9,7 @@ import {
   Truck,
   RefreshCcw,
 } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/hooks/useCart";
 import { fetchProductById } from "@/services/productService";
 import { Product } from "@/types/Product";
 import { Accordion } from "@/types/Accordion";

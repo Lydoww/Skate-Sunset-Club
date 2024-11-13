@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/skatelogo.png";
-import { useCart } from "../../contexts/CartContext"; // Utilisation du contexte panier
+import { useCart } from "@/hooks/useCart";
 
 interface NavbarProps {
   isProductDetailPage: boolean;
@@ -31,17 +31,23 @@ const Navbar = ({ isProductDetailPage, scroll }: NavbarProps) => {
           className="md:hidden focus:outline-none"
           aria-label="Toggle menu"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+          <div className={`space-y-1.5 transition-all duration-300`}>
+            <div
+              className={`w-6 h-0.5 bg-current transition-all duration-300 ${
+                menuOpen ? "transform rotate-45 translate-y-1.5" : ""
+              }`}
+            ></div>
+            <div
+              className={`w-6 h-0.5 bg-current transition-all duration-300 ${
+                menuOpen ? "opacity-0" : ""
+              }`}
+            ></div>
+            <div
+              className={`w-6 h-0.5 bg-current transition-all duration-300 ${
+                menuOpen ? "transform -rotate-45 -translate-y-1.5" : ""
+              }`}
+            ></div>
+          </div>
         </button>
 
         {/* Navigation pour desktop */}
@@ -99,13 +105,25 @@ const Navbar = ({ isProductDetailPage, scroll }: NavbarProps) => {
       {menuOpen && (
         <div className="absolute top-24 left-0 w-full bg-black bg-opacity-90 text-white py-4 md:hidden">
           <nav className="flex flex-col items-center">
-            <Link to="/" className="py-2 text-lg navbar-link" onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/"
+              className="py-2 text-lg navbar-link"
+              onClick={() => setMenuOpen(false)}
+            >
               HOME
             </Link>
-            <Link to="/company" className="py-2 text-lg navbar-link" onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/company"
+              className="py-2 text-lg navbar-link"
+              onClick={() => setMenuOpen(false)}
+            >
               COMPANY
             </Link>
-            <Link to="/contact" className="py-2 text-lg navbar-link" onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/contact"
+              className="py-2 text-lg navbar-link"
+              onClick={() => setMenuOpen(false)}
+            >
               CONTACT
             </Link>
           </nav>
