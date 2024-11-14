@@ -1,5 +1,5 @@
-import React from "react";
-import { Product } from "../../types/Product";
+import { useEffect } from "react";
+import { Product } from "@/types/Product";
 import MinimalistSkateProductCard from "./CardProducts";
 
 interface ProductGridProps {
@@ -9,6 +9,15 @@ interface ProductGridProps {
 export default function MinimalistSkateProductGrid({
   products,
 }: ProductGridProps) {
+  useEffect(() => {
+    if (window.location.hash === "#our-collection") {
+      const productSection = document.getElementById("our-collection");
+      if (productSection) {
+        productSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
+
   return (
     <section
       id="our-collection"
