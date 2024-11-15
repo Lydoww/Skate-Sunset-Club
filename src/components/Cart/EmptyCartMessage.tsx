@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import Footer from '../Bars/FootBar';
 
 export default function EmptyCartMessage() {
   return (
+    <>
     <div className="flex flex-col items-center justify-center">
       <div className="text-center py-12">
         <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
@@ -11,5 +13,6 @@ export default function EmptyCartMessage() {
         </Link>
       </div>
     </div>
+    </>
   );
 }

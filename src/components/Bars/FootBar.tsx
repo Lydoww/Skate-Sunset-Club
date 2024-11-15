@@ -21,7 +21,6 @@ const Footer = () => {
     } else {
       navigate("/products#our-collection");
     }
-
   };
 
   return (
@@ -56,6 +55,14 @@ const Footer = () => {
               </li>
               <li>
                 <a
+                  href="/company"
+                  className="text-gray-400 hover:text-yellow-800 transition-colors"
+                >
+                  Company
+                </a>
+              </li>
+              <li>
+                <a
                   href="/contact"
                   className="text-gray-400 hover:text-yellow-800 transition-colors"
                 >
@@ -77,7 +84,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/privacy"
                   className="text-gray-400 hover:text-yellow-800 transition-colors"
                 >
                   Privacy Policy

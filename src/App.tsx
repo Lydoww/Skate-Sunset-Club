@@ -5,7 +5,9 @@ import ProductPage from "@/pages/ProductDetailPage";
 import ContactPage from "@/pages/Contact";
 import CartPage from "@/pages/CartPage";
 import FAQ from "@/pages/Faq";
+import PrivacyPage from "@/pages/PrivacyPage";
 import { ToastContainer } from "react-toastify";
+import Company from "./pages/CompanyPage";
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/panier" element={<CartPage />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/company" element={<Company />} />
       </Routes>
       
       {/* Toast notifications */}
