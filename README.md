@@ -9,7 +9,7 @@
 - **Product Display**: Displays products fetched from **FakeStoreAPI**. Currently, the API doesn't include skate-specific products.
 - **Responsive Design**: Fully responsive for all devices using **TailwindCSS**.
 - **Reusable Components**: Modular architecture with reusable React components for easy maintenance and scalability.
-- **Shopping Cart** (Future Update): Ready to integrate cart management and checkout functionalities.
+- **Shopping Cart**: Cart management.
 - **Smooth Navigation**: Simple and smooth navigation with **React Router**.
 
 ---
@@ -32,18 +32,12 @@ The project currently uses **FakeStoreAPI** to fetch product data. Unfortunately
 
 ## Roadmap
 
-- **Shopping Cart Implementation**: Adding functionality for users to manage their cart, view items, and proceed to checkout.
 - **Real Skateboard Products**: Replacing the current generic product data with actual skateboarding gear.
 - **User Authentication**: Introducing user accounts, allowing customers to register, log in, and track orders.
 - **Product Reviews & Ratings**: Allowing users to leave reviews and ratings for products they have purchased.
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## Acknowledgments
 
