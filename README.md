@@ -47,4 +47,5 @@ The project currently uses **FakeStoreAPI** to fetch product data. Unfortunately
 
 ---
 
-Thanks for checking out the **Sunset Skate Club** e-commerce project! Stay tuned for future updates as we continue to improve the site and expand the product offerings.
+Thanks for checking out the **Sunset Skate Club** e-commerce project : https://sunsetskateclub.netlify.app/
+
