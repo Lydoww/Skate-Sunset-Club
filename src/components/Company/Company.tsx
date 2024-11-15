@@ -1,6 +1,6 @@
 import Footer from "../Bars/FootBar";
 import Navbar from "../Bars/Navbar";
-import tonyhawkImage from "@/assets/tonyHawk.png";
+import tonyhawkImage from "@/assets/tonyhawk.png";
 import leticiaImage from "@/assets/leticiaBufoni.png";
 import rodneyImage from "@/assets/rodneyMullen.png";
 import nyjahImage from "@/assets/nyjahHuston.png";
