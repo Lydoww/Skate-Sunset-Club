@@ -11,7 +11,7 @@ interface NavbarProps {
 
 const Navbar = ({ isProductDetailPage, scroll }: NavbarProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { itemCount } = useCart(); // Récupérer le nombre d'articles du panier à partir du contexte
+  const { itemCount } = useCart(); 
 
   return (
     <header

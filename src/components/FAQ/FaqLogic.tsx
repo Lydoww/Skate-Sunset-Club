@@ -1,7 +1,6 @@
 import { useState } from "react";
-import skate2 from "@/assets/skate2.jpg";
 import Navbar from "../Bars/Navbar";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 
 interface FaqItemProps {
   question: string;
@@ -27,7 +26,7 @@ const FaqItem = ({ question, answer }: FaqItemProps) => {
 };
 
 const FAQ = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   const faqData = [
     {
@@ -63,7 +62,7 @@ const FAQ = () => {
 
   return (
     <>
-    <Navbar isProductDetailPage={false} scroll={true} />
+      <Navbar isProductDetailPage={false} scroll={true} />
       <div className="m-16 bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-8">

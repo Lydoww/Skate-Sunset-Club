@@ -14,7 +14,6 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-// Durée de session en millisecondes (1 heure)
 const SESSION_DURATION = 60 * 60 * 1000;
 
 export function CartContextProvider({ children }: CartProviderProps) {
@@ -22,12 +21,10 @@ export function CartContextProvider({ children }: CartProviderProps) {
     const savedCart = localStorage.getItem("cartItems");
     const savedTimestamp = localStorage.getItem("cartTimestamp");
 
-    // Vérifie si le panier a été enregistré et s'il est encore valide
     if (savedCart && savedTimestamp) {
       const timestamp = parseInt(savedTimestamp, 10);
       const currentTime = Date.now();
 
-      // Si l'heure actuelle dépasse d'une heure l'horodatage sauvegardé, on efface les données
       if (currentTime - timestamp < SESSION_DURATION) {
         return JSON.parse(savedCart);
       } else {

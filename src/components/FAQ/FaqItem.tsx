@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 interface FaqItemProps {
   question: string;
@@ -11,7 +10,6 @@ const FaqItem = ({ question, answer }: FaqItemProps) => {
 
   const toggleAnswer = () => setIsOpen(!isOpen);
 
-
   return (
     <div className="border-b border-gray-300 py-4">
       <div
@@ -22,7 +20,6 @@ const FaqItem = ({ question, answer }: FaqItemProps) => {
       </div>
       {isOpen && <div className="mt-2 text-gray-700 text-lg">{answer}</div>}
     </div>
-    
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Footer from "../Bars/FootBar";
 import Navbar from "../Bars/Navbar";
 import tonyhawkImage from "@/assets/tonyHawk.png";

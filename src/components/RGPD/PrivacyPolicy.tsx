@@ -1,11 +1,10 @@
-import React from "react";
 import Footer from "../Bars/FootBar";
 import Navbar from "../Bars/Navbar";
 
 const PrivacyPolicy = () => {
   return (
     <>
-    <Navbar isProductDetailPage={false} scroll={true} />
+      <Navbar isProductDetailPage={false} scroll={true} />
       <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 mt-20">
         <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
           <div className="px-4 py-5 sm:p-6">

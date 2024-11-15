@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
