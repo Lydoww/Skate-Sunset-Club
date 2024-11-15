@@ -54,7 +54,7 @@ export default function ProductDetail() {
             }`}
           />
         </button>
-        {isOpen && <div className="pb-4 text-gray-600">{children}</div>}
+        {isOpen && <div className="pb-4 text-gray-900">{children}</div>}
       </div>
     );
   };
@@ -161,7 +161,7 @@ export default function ProductDetail() {
                 ))}
                 <span className="ml-2 text-sm text-gray-600">(4.5/5)</span>
               </div>
-              <p className="text-gray-600 mb-4">{product.description}</p>
+              <p className="text-gray-900 mb-4">{product.description}</p>
               <p className="text-2xl font-bold mb-4">
                 ${product.price.toFixed(2)}
               </p>
@@ -225,7 +225,7 @@ export default function ProductDetail() {
                       To process an exchange or refund, contact us with your
                       order number at{" "}
                       <a
-                        href="mailto:contact@homonoia-paris.com"
+                        href="mailto:FakeStoreAPI@gmail.com"
                         className="text-blue-600 hover:underline"
                       >
                         FakeStoreAPI@gmail.com
