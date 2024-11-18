@@ -44,7 +44,6 @@ export default function Loader() {
         <p className="mt-4 text-2xl font-semibold text-white">
           Loading <span className="inline-block w-6 text-left">{dots}</span>
         </p>
-        <p className="sr-only">Loading, just wait a second.</p>
       </div>
     </div>
   );
