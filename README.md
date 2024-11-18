@@ -1,6 +1,7 @@
 # Sunset Skate Club - E-commerce
 
-**Sunset Skate Club** is an e-commerce site built with **React**, **TypeScript**, **TailwindCSS**, and **Vite**. The project provides an online shopping experience for skate products, though it currently uses a generic product API (FakeStoreAPI). Future updates will introduce real skateboard products and more features.
+**Sunset Skate Club** is an e-commerce site built with **React**, **TypeScript**, **TailwindCSS**, and **Vite**. The project provides an online shopping experience for skate products, though it currently uses a generic product API (FakeStoreAPI). 
+I intended to scrape data from SkateShop, but to avoid any legal issues, I’m currently awaiting their response to confirm whether using their API is permitted. Future updates will introduce real skateboard products and more features.
 
 ---
 
