@@ -59,6 +59,13 @@ export default function ProductDetail() {
     );
   };
 
+  const getStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStars;
+    return { fullStars, halfStars, emptyStars };
+  };
+
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -135,7 +142,7 @@ export default function ProductDetail() {
                 src={product.image}
                 alt={product.title}
                 ref={imageRef}
-                className="w-full max-w-md ms h-auto object-contain "
+                className="w-full max-w-md h-auto object-contain"
               />
               <button
                 className="mb-4 flex items-center hover:underline mt-8"
@@ -153,13 +160,45 @@ export default function ProductDetail() {
             >
               <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
               <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-5 w-5 text-yellow-400 fill-current"
-                  />
-                ))}
-                <span className="ml-2 text-sm text-gray-600">(4.5/5)</span>
+                {(() => {
+                  const { fullStars, halfStars, emptyStars } = getStars(
+                    product.rating.rate || 0
+                  );
+
+                  return (
+                    <>
+                      {[...Array(fullStars)].map((_, i) => (
+                        <Star
+                          key={`full-${i}`}
+                          className="h-5 w-5 text-yellow-400 fill-current"
+                          stroke="black" // Bordure fine
+                          strokeWidth="0.5" // Épaisseur de la bordure
+                        />
+                      ))}
+                      {[...Array(halfStars)].map((_, i) => (
+                        <Star
+                          key={`half-${i}`}
+                          className="h-5 w-5 text-yellow-400"
+                          style={{
+                            clipPath: "polygon(0 0, 50% 0, 50% 100%, 0 100%)",
+                            fill: "currentColor",
+                          }}
+                          stroke="black"
+                          strokeWidth="0.5"
+                        />
+                      ))}
+                      {[...Array(emptyStars)].map((_, i) => (
+                        <Star
+                          key={`empty-${i}`}
+                          className="h-5 w-5 text-gray-300"
+                        />
+                      ))}
+                    </>
+                  );
+                })()}
+                <span className="ml-2 text-sm text-gray-600">
+                  ({product.rating.rate}/5)
+                </span>
               </div>
               <p className="text-gray-900 mb-4">{product.description}</p>
               <p className="text-2xl font-bold mb-4">
@@ -179,7 +218,7 @@ export default function ProductDetail() {
                 />
               </div>
               <button
-                onClick={() => handleAddToCart()}
+                onClick={handleAddToCart}
                 className="w-full bg-yellow-700 text-black py-2 px-4 rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center mb-8"
               >
                 <ShoppingCart className="mr-2 h-4 w-4" /> Add to cart
@@ -212,8 +251,7 @@ export default function ProductDetail() {
                     <p>
                       You have 30 days from the receipt of your package to
                       return the product and request an exchange (subject to
-                      stock availability), receive a store credit, or a
-                      refund.
+                      stock availability), receive a store credit, or a refund.
                     </p>
                     <p>
                       <strong>
@@ -230,6 +268,7 @@ export default function ProductDetail() {
                       >
                         FakeStoreAPI@gmail.com
                       </a>
+                      .
                     </p>
                   </div>
                 </AccordionItem>
